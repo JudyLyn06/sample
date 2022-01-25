@@ -1,0 +1,200 @@
+====Basic CLI====
+
+pwd - present working directory
+
+cd
+<!-- •	'cd [name of the folder]'' means 'change directory'
+	ex. 'cd [name of the folder where we want to look for]'' -->
+
+		'cd' .. -> it means to go back to the parent directory/folder.to navigate up one directory level.
+
+mkdir
+<!-- 
+•	mkdir [name of the folder] - means to 'make directory' or to create a new folder
+	ex. 'mkdir Newfolder' -->
+
+ls
+<!-- 
+•	'ls' - means 'list', will return all existing files and folders inside the present working directory.
+	ex. 'ls' -> to return the all files and folders
+		'ls [name of the folder]' will return all files and folders inside the specific folder
+		'ls sampleFolder - will give the list of the folder you enter -->
+
+mv
+<!-- •	Mv -  mv ‘name of folder to be moved’ ‘path file’ -->
+
+touch
+<!-- •	touch [name of the file with its extension] - will create a new file
+	ex. 'touch note.txt' this will create a new file called 'note.txt', if the file not exists.
+ -->
+
+rm
+<!-- •	'rm [name of the file]'-> to delete file -->
+
+
+rmdir
+<!-- •	'rmdir' [name of the folder]->to delete an empty directory -->
+
+rm -r
+<!-- •	'rm -r [name of the folder]' - to delete a directory and all of its contents recursively -->
+
+
+subl
+<!-- 
+
+•	subl [name of the folder]. this will open the sublime text for the present working directory
+	ex. 
+		'subl .' - single dot means the present working directory
+		'subl samplefolder' - this will open a sublime for the specific folder
+
+
+clear
+•	clear -> to clear the command line in the terminal -->
+
+
+====Gitlab SSH Keys====
+(Steps are also applicable with Github SSH Keys)
+Note: If you have already generated your SSH Key to your current device, no need to do this anymore.
+
+1. Generate an SSH Key:
+
+  a. In your terminal, type:
+  ssh-keygen -t ed25519 -C "email@example.com"
+  
+  (Replace email@example.com with your own email/name, but remember to keep the quotation marks)
+  
+  b. Various messages will display, simply keep pressing enter until you see a message containing "The key's randomart image is"
+  At that point, the key has been generated.
+
+2. Copy your SSH Key:
+
+  In your terminal, type one of the following:
+  
+  (FOR MAC): pbcopy < ~/.ssh/id_ed25519.pub
+  (FOR LINUX): xclip -sel clip < ~/.ssh/id_ed25519.pub
+  (FOR WINDOWS): cat ~/.ssh/id_ed25519.pub | clip
+
+  Copy the SSH key from your terminal
+  Your SSH Key is now saved in your clipboard. Unless you copy some other line of text, it will remain there. To be safe, immediately open Notepad (or a similar app) and paste your key there. It should look similar (but not exactly the same) to this:
+
+  ssh-ed25519 l1SZD49ADLFFFII1NzaCdN8A/SkfTjld9nJ3nu4Yd5Y8g8+Km11/N+ZZMh4shQ email@example.com
+
+  (Note: The above is only an example and is an invalid SSH Key. Please do NOT use it)
+
+3. Apply your SSH Key to Gitlab:
+
+  a. Go to https://gitlab.com/profile/keys and ensure you are logged into an account with the same email you used for step 1 of this guide.
+  
+  b. Right click on the box with the gray text that says [Typically starts with "ssh-ed25519 ..." or "ssh-rsa ..."] and paste your SSH Key there.
+  
+  c. Click on the green "Add key" button below the bow.
+  
+  d. If you can now see something under "Your SSH keys" near the bottom of the page, you're done!
+
+====Git Commands====
+(local repository)
+
+<!-- 1. To create a git repo, issue command: -->
+	'git init'  meaning to initialize
+
+
+<!-- 6. To set the user email associated to the local Git repo -->
+	'git config --global user.email "[email]"'
+	Note: one time set up only
+<!-- 7. To set the user name associated to the local git repo -->
+	'git config user.name "[fullname]"'
+	Note: one time set up only
+
+<!-- 2. To check the updated/untracked  files: -->
+	'git status' 
+
+	untracked files = this is what we called the working area
+
+<!-- 3. To add those untracked/updated files: -->
+
+	git add –A 
+	<!-- = -A means all of the untracked file will be included on the staging area -->
+
+	git add . => add all files in present working directory
+
+	git add [file name]
+
+4. To save the changes, added from the staging area, to our history in local repository 'git commit -m "[description of our revisions]"'
+
+git commit -m "Initial commit" 
+
+
+5. To display the history of changes of our git repository.
+	'git log'
+
+	'git log --oneline'
+	- The --oneline option will simplify the output.
+
+
+3. Now that we have established our connection from our local machine to our gitlab. let's upload our project to our gitlab.
+
+
+ 
+6. to connect your local repo to your remote repo, use command below: -->
+	'git remote add [alias for your remote repo] [ssh gitlab url]'
+
+<!-- 	add/connects our local repo to our remote repo -->
+
+7. To check if the remote repo url has been established on our local repo, issue the command below: -->
+
+	'git remote -v' v means verbose, meaning it will return a message every time we check the file
+
+	-V flag: means verbose, using or expressing words.
+
+8. To upload your local repo to your remote repo, issue the command below: -->
+
+	'git push [alias of your remote] master'
+
+======================================================
+To update our Git repositories:
+1. git add (git status)
+2. git commit -m
+3. git push origin master
+
+=======================================================
+9. To rename an alias for our remote repo, issue the command below:
+
+	 git remote rename "[name of alias]" "[updated remote alias]"
+
+	 ex.
+	 git remote rename my-old-alias my-new-alias-name
+
+10. Check the git user credentials
+	git config --global --list
+
+11. Get the url of a remote repository.
+
+		git remote get-url [remote-name]
+
+		example:
+			git remote get-url origin
+
+12. Change the url of a remote name.
+	
+		git remote set-url [remote-name] [git-repository-link]
+
+		example:
+			GitLab
+				git remote set-url secondary git@gitlab.com:johndoe/test.git
+			GitHub
+				git remote set-url secondary git@github.com:johndoe/test.git
+
+13. Remove a remote repository.
+
+		git remote remove [remote-name]
+
+		example:
+			git remote remove secondary
+
+14. Clone a repository.
+
+		git clone [git-repository-link]
+
+15. Pull the changes.
+
+			git pull [remote-name] [branch-name]
